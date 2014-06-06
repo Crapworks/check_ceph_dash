@@ -37,9 +37,22 @@ class CephClusterStatus(dict):
         if nagios_exit == 3:
             return ""
 
-        # pg perfdata to fdetch
-        perf_values = ['bytes_used', 'bytes_total', 'bytes_avail', 'data_bytes', 'num_pgs', 'op_per_sec', 'read_bytes_sec', 'write_bytes_sec']
-        perfdata=' '.join(['%s=%s' % (val, self['pgmap'].get(val, 0)) for val in perf_values])
+        # perfdata to fetch
+        perf_values = {
+            'pgmap': ['bytes_used', 'bytes_total', 'bytes_avail', 'data_bytes', 'num_pgs', 'op_per_sec', 'read_bytes_sec', 'write_bytes_sec'],
+            'osdmap': ['num_osds', 'num_up_osds', 'num_in_osds']
+        }
+
+        perfdata = dict()
+        for map_type, values in perf_values.iteritems():
+            for value in values:
+                # the json structure is horrible...
+                if map_type == 'osdmap':
+                    perfdata[value] = self['osdmap'][map_type].get(value, 0)
+                else:
+                    perfdata[value] = self[map_type].get(value, 0)
+
+        perfdata=' '.join(['%s=%s' % (key, val) for key, val in perfdata.iteritems()])
 
         return perfdata
 

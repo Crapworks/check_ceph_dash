@@ -18,6 +18,6 @@ OK: ceph cluster operates with no problems|bytes_used=244455534592 bytes_total=3
 Fancy Dashboards
 ----------------
 
-In combination with the [Collectd Ceph Plugin](https://github.com/Crapworks/collectd-ceph) and a graphite backend, you can create quite fancy metric dashboards. See the following screenshot for an example (the frontend is [Graphana](http://grafana.org/))
+By using the generated performance data and sending them to a graphite backend, you can create quite fancy metric dashboards. See the following screenshot for an example (the frontend is [Graphana](http://grafana.org/))
 
 ![screenshot01](https://github.com/crapworks/check_ceph_dash/raw/master/screenshots/ceph-grafana.png)

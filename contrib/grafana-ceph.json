@@ -69,10 +69,10 @@
           },
           "targets": [
             {
-              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.read_bytes_sec.value), 'Read')"
+              "target": "alias(avg(<YOUR_GRAPHITE_PREFIX>.read_bytes_sec.value), 'Read')"
             },
             {
-              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.write_bytes_sec.value),'Write')"
+              "target": "alias(avg(<YOUR_GRAPHITE_PREFIX>.write_bytes_sec.value),'Write')"
             }
           ],
           "aliasColors": {},
@@ -133,7 +133,7 @@
           },
           "targets": [
             {
-              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.op_per_sec.value), 'Operations')"
+              "target": "alias(avg(<YOUR_GRAPHITE_PREFIX>.op_per_sec.value), 'Operations')"
             }
           ],
           "aliasColors": {},
@@ -203,13 +203,13 @@
           },
           "targets": [
             {
-              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_osds.value), 'OSD Total')"
+              "target": "alias(avg(<YOUR_GRAPHITE_PREFIX>.num_osds.value), 'OSD Total')"
             },
             {
-              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_in_osds.value),'OSD In')"
+              "target": "alias(averageSeries(<YOUR_GRAPHITE_PREFIX>.num_in_osds.value),'OSD In')"
             },
             {
-              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_up_osds.value),'OSD Up')"
+              "target": "alias(averageSeries(<YOUR_GRAPHITE_PREFIX>.num_up_osds.value),'OSD Up')"
             }
           ],
           "aliasColors": {},
@@ -269,10 +269,10 @@
           },
           "targets": [
             {
-              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.bytes_used.value), 'Used')"
+              "target": "alias(avg(<YOUR_GRAPHITE_PREFIX>.bytes_used.value), 'Used')"
             },
             {
-              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.bytes_total.value),'Maximum')"
+              "target": "alias(averageSeries(<YOUR_GRAPHITE_PREFIX>.bytes_total.value),'Maximum')"
             }
           ],
           "aliasColors": {},
@@ -342,7 +342,7 @@
           },
           "targets": [
             {
-              "target": "monitoring.ceph-mon-bs*_infra_server_lan.unitix_load.load1.value"
+              "target": "<YOUR_GRAPHITE_PREFIX>.load.load1.value"
             }
           ],
           "aliasColors": {},
@@ -402,7 +402,7 @@
           },
           "targets": [
             {
-              "target": "monitoring.ceph-mon-bs0*_infra_server_lan.unitix_memory.used.value"
+              "target": "<YOUR_GRAPHITE_PREFIX>.memory.used.value"
             }
           ],
           "aliasColors": {},
@@ -462,7 +462,7 @@
           },
           "targets": [
             {
-              "target": "monitoring.ceph-osd-bs*_infra_server_lan.unitix_load.load1.value"
+              "target": "<YOUR_GRAPHITE_PREFIX>.load.load1.value"
             }
           ],
           "aliasColors": {},
@@ -522,7 +522,7 @@
           },
           "targets": [
             {
-              "target": "monitoring.ceph-osd-bs0*_infra_server_lan.unitix_memory.used.value"
+              "target": "<YOUR_GRAPHITE_PREFIX>.memory.used.value"
             }
           ],
           "aliasColors": {},

@@ -1,0 +1,604 @@
+{
+  "title": "Ceph Cluster Status",
+  "services": {
+    "filter": {
+      "list": [],
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      }
+    }
+  },
+  "rows": [
+    {
+      "title": "Performance",
+      "height": "300px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "bytes",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": true,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.read_bytes_sec.value), 'Read')"
+            },
+            {
+              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.write_bytes_sec.value),'Write')"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Throughput",
+          "leftYAxisLabel": "Cluster Throughput",
+          "rightYAxisLabel": ""
+        },
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": true,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.op_per_sec.value), 'Operations')"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "IOPS",
+          "leftYAxisLabel": "Intpu/Output Operations"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Data Store",
+      "height": "300px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 0,
+          "linewidth": 4,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": true,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_osds.value), 'OSD Total')"
+            },
+            {
+              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_in_osds.value),'OSD In')"
+            },
+            {
+              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.num_up_osds.value),'OSD Up')"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "OSD Status",
+          "leftYAxisLabel": "OSD Status Overview"
+        },
+        {
+          "span": 6,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "bytes",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 0,
+          "linewidth": 4,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": true,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "alias(avg(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.bytes_used.value), 'Used')"
+            },
+            {
+              "target": "alias(averageSeries(monitoring.ceph-mon-bs*_infra_server_lan.ceph_overall_cluster_status.bytes_total.value),'Maximum')"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Storage Capacity",
+          "leftYAxisLabel": "Remaining Storage"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "Consistency",
+      "height": "300px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 3,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": false,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "monitoring.ceph-mon-bs*_infra_server_lan.unitix_load.load1.value"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Monitor Load",
+          "leftYAxisLabel": "System Load"
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "bytes",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": false,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "monitoring.ceph-mon-bs0*_infra_server_lan.unitix_memory.used.value"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Monitor Memory",
+          "leftYAxisLabel": "System Memory"
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": false,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "monitoring.ceph-osd-bs*_infra_server_lan.unitix_load.load1.value"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "OSD Load",
+          "leftYAxisLabel": "System Load"
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "graphite",
+          "loadingEditor": false,
+          "datasource": "graphite",
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "bytes",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": 0,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "annotate": {
+            "enable": false
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "legend": {
+            "show": false,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "percentage": false,
+          "zerofill": true,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "targets": [
+            {
+              "target": "monitoring.ceph-osd-bs0*_infra_server_lan.unitix_memory.used.value"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "OSD Memory",
+          "leftYAxisLabel": "System Memory"
+        }
+      ],
+      "notice": false
+    }
+  ],
+  "editable": true,
+  "failover": false,
+  "panel_hints": false,
+  "style": "dark",
+  "pulldowns": [
+    {
+      "type": "filtering",
+      "collapse": false,
+      "notice": false,
+      "enable": false
+    },
+    {
+      "type": "annotations",
+      "enable": false
+    }
+  ],
+  "nav": [
+    {
+      "type": "timepicker",
+      "collapse": false,
+      "notice": false,
+      "enable": true,
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "now": true
+    }
+  ],
+  "loader": {
+    "save_gist": false,
+    "save_elasticsearch": false,
+    "save_local": true,
+    "save_default": true,
+    "save_temp": true,
+    "save_temp_ttl_enable": false,
+    "save_temp_ttl": "30d",
+    "load_gist": false,
+    "load_elasticsearch": false,
+    "load_elasticsearch_size": 20,
+    "load_local": true,
+    "hide": false
+  },
+  "refresh": "1m",
+  "tags": [],
+  "timezone": "browser",
+  "hideControls": false
+}

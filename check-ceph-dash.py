@@ -39,9 +39,17 @@ class CephClusterStatus(dict):
 
         # perfdata to fetch
         perf_values = {
-            'pgmap': ['bytes_used', 'bytes_total', 'bytes_avail', 'data_bytes', 'num_pgs', 'op_per_sec', 'read_bytes_sec', 'write_bytes_sec'],
+            'pgmap': ['bytes_used', 'bytes_total', 'bytes_avail', 'data_bytes', 'num_pgs', 'read_bytes_sec', 'write_bytes_sec'],
             'osdmap': ['num_osds', 'num_up_osds', 'num_in_osds']
         }
+
+        if 'op_per_sec' in self['pgmap']:
+            # pre Jewel
+            perf_values['pgmap'].append('op_per_sec')
+        else:
+            # >= Jewel
+            perf_values['pgmap'].append('write_op_per_sec')
+            perf_values['pgmap'].append('read_op_per_sec')
 
         perfdata = dict()
         for map_type, values in perf_values.iteritems():

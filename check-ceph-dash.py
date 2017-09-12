@@ -73,7 +73,12 @@ class CephClusterStatus(dict):
         if nagios_exit == 0:
             summary = 'ceph cluster operates with no problems'
         else:
-            summary = '\n'.join([ "{severity}: {summary}".format(**problems) for problems in self['health']['summary']])
+            if 'summary' in self['health']:
+                summary = '\n'.join([ "{severity}: {summary}".format(**problems) for problems in self['health']['summary']])
+            elif 'checks' in self['health']:
+                summary = '\n'.join([ "{severity}: {summary[message]}".format(**problems) for problems in self['health']['checks'].values()])
+            else:
+                summary = 'Unable to fetch healt details. Please check cluster directly'
 
         return "%s: %s" % (nagios_str, summary)
 

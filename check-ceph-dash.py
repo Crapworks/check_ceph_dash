@@ -69,7 +69,10 @@ class CephClusterStatus(dict):
         return int(nagios_exit)
 
     def get_nagios_string(self):
-        nagios_str, nagios_exit = self._map(self['health']['overall_status'])
+        if 'status' in self['health']:
+            nagios_str, nagios_exit = self._map(self['health']['status'])
+        else:
+            nagios_str, nagios_exit = self._map(self['health']['overall_status'])
         if nagios_exit == 0:
             summary = 'ceph cluster operates with no problems'
         else:

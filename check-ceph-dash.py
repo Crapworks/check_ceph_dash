@@ -33,7 +33,10 @@ class CephClusterStatus(dict):
             return ('UNKNOWN', 3)
 
     def get_perf_data(self):
-        nagios_str, nagios_exit = self._map(self['health']['overall_status'])
+        if 'status' in self['health']:
+            nagios_str, nagios_exit = self._map(self['health']['status'])
+        else:
+            nagios_str, nagios_exit = self._map(self['health']['overall_status'])
         if nagios_exit == 3:
             return ""
 
@@ -65,7 +68,10 @@ class CephClusterStatus(dict):
         return perfdata
 
     def get_exit_code(self):
-        nagios_str, nagios_exit = self._map(self['health']['overall_status'])
+        if 'status' in self['health']:
+            nagios_str, nagios_exit = self._map(self['health']['status'])
+        else:
+            nagios_str, nagios_exit = self._map(self['health']['overall_status'])
         return int(nagios_exit)
 
     def get_nagios_string(self):
@@ -76,10 +82,10 @@ class CephClusterStatus(dict):
         if nagios_exit == 0:
             summary = 'ceph cluster operates with no problems'
         else:
-            if 'summary' in self['health']:
-                summary = '\n'.join([ "{severity}: {summary}".format(**problems) for problems in self['health']['summary']])
-            elif 'checks' in self['health']:
+            if 'checks' in self['health']:
                 summary = '\n'.join([ "{severity}: {summary[message]}".format(**problems) for problems in self['health']['checks'].values()])
+            elif 'summary' in self['health']:
+                summary = '\n'.join([ "{severity}: {summary}".format(**problems) for problems in self['health']['summary']])
             else:
                 summary = 'Unable to fetch healt details. Please check cluster directly'
 

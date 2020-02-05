@@ -1,7 +1,7 @@
 check-ceph-dash - nagios/icinga check for use with ceph-dash
 ============================================================
 
-This nagios/icinga plugin simply connects to a [ceph-dash](https://github.com/Crapworks/ceph-dash) instance, gather the information about the overall cluster health and outputs a nagios compatible message including several perfdata metrics.
+This nagios/icinga plugin simply connects to a [ceph-dash](https://github.com/Crapworks/ceph-dash) instance, gathers the information about the overall cluster health and outputs a nagios compatible message including several perfdata metrics.
 
 **dependencies**
 

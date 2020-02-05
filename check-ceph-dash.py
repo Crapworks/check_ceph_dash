@@ -87,7 +87,7 @@ class CephClusterStatus(dict):
             elif 'summary' in self['health']:
                 summary = '\n'.join([ "{severity}: {summary}".format(**problems) for problems in self['health']['summary']])
             else:
-                summary = 'Unable to fetch healt details. Please check cluster directly'
+                summary = 'Unable to fetch health details. Please check cluster directly'
 
         return "%s: %s" % (nagios_str, summary)
 
